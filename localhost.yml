@@ -1,7 +1,7 @@
 - hosts: localhost
   connection: local
   gather_facts: no
-  sudo: no
+  sudo: yes
   vars:
     homebrew_taps:
     homebrew_packages:
@@ -48,3 +48,8 @@
         - name: save infomation of cask packages
           shell: brew cask info {{ item }} > cask_info/{{ item }}
           with_items: cask_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list
+
+        # gem
+        - name: install gem packages
+          gem: name={{ item.name }} state={{ item.state|default('installed') }}
+          with_items: gem_packages
