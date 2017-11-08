@@ -1,4 +1,0 @@
----
-
-- name: Setup dotfiles
-  shell: sh -c "`curl -fsSL https://raw.github.com/mlaferrera/dotfiles/master/install.sh`"
