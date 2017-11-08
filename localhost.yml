@@ -1,0 +1,33 @@
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  sudo: no
+  vars:
+    homebrew_taps:
+    homebrew_packages:
+    homebrew_cask_packages:
+    gem_packages:
+        - { name: homesick }
+    tasks:
+        - name: add homebrew tap repository
+          homebrew_tap: tap={{ item }} state=present
+          with_items: homebrew_taps
+
+        - name: update homebrew
+          homebrew: update_homebrew=yes
+
+        - name: install brew packages
+          homebrew: >
+            name={{ item.name }}
+            state={{ item.state | defalt() | join(',') }}
+            if item.install_options is not string
+            else item.install_options
+          with_items: homebrew_packages
+          register: brew_result
+
+        - name: make infomation directory of brew packages
+          file: path=brew_info state=directory
+
+        - name: save infomation of packages
+          shell: brew info {{ item }} > brew_info/{{ item }}
+          with_items: brew_result | selectattr('changed') | map(attribute='item') | map(attribute='item') | list
