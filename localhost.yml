@@ -16,6 +16,7 @@
         - name: update homebrew
           homebrew: update_homebrew=yes
 
+        # brew
         - name: install brew packages
           homebrew: >
             name={{ item.name }}
@@ -28,6 +29,22 @@
         - name: make infomation directory of brew packages
           file: path=brew_info state=directory
 
-        - name: save infomation of packages
+        - name: save infomation of brew packages
           shell: brew info {{ item }} > brew_info/{{ item }}
-          with_items: brew_result | selectattr('changed') | map(attribute='item') | map(attribute='item') | list
+          with_items: brew_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list
+
+        # cask
+        - name: install homebrew-cask
+          homebrew: name=brew-cask state=latest
+
+        - name: install cask packages
+          homebrew_cask: name={{ item.name }} state={{ item.state|default('installed') }}
+          with_items: homebrew_cask_packages
+          register: cask_result
+
+        - name: make infomation directory of cask packages
+          file: path=cask_info state=directory
+
+        - name: save infomation of cask packages
+          shell: brew cask info {{ item }} > cask_info/{{ item }}
+          with_items: cask_result.results | selectattr('changed') | map(attribute='item') | map(attribute='name') | list
