@@ -1,0 +1,464 @@
+---
+
+###############################################################################
+# General UI/UX                                                               #
+###############################################################################
+
+- name: Set timezone to America/New_York
+  shell: systemsetup -settimezone "America/New_York"
+
+- name: Menu bar - disable transparency
+  shell: defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool true
+
+- name: Set highlight color to green
+  shell: defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
+
+- name: Set sidebar icon size to medium
+  shell: defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
+
+- name: Always show scrollbars
+  # Possible values: `WhenScrolling`, `Automatic` and `Always`
+  shell: defaults write NSGlobalDomain AppleShowScrollBars -string "Automatic"
+
+- name: Increase window resize speed for Cocoa applications
+  shell: defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+- name: Expand save panel by default
+  shell: "{{ item }}"
+  with_items:
+    - defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+    - defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+- name: Expand print panel by default
+  shell: "{{ item }}"
+  with_items:
+    - defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+    - defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+- name: Automatically quit printer app once the print jobs complete
+  shell: defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+- name: Display ASCII control characters using caret notation in standard text views
+  shell: defaults write NSGlobalDomain NSTextShowsControlCharacters -bool true
+
+- name: Enable Resume system-wide
+  shell: defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
+
+- name: Disable automatic termination of inactive apps
+  shell: defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
+
+- name: Set Help Viewer windows to non-floating mode
+  shell: defaults write com.apple.helpviewer DevMode -bool true
+
+- name: Reveal IP address, hostname, OS version, etc. when clicking the clock in the login window
+  shell: defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+  become: yes
+
+- name: Restart automatically if the computer freezes
+  shell: systemsetup -setrestartfreeze on
+
+- name: Check for software updates daily, not just once per week
+  shell: defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+# - name: Disable Notification Center and remove the menu bar icon
+#   shell: launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+
+- name: Disable smart quotes
+  shell: defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+- name: Disable smart dashes
+  shell: defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+###############################################################################
+# Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
+###############################################################################
+
+- name: Trackpad - enable tap to click for this user and for the login screen
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+    - defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+    - defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# - name: Trackpad - map bottom right corner to right-click
+#   shell: "{{ item }}"
+#   with_items:
+#     - defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+#     - defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+#     - defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+#     - defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+
+- name: Increase sound quality for Bluetooth headphones/headsets
+  shell: defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+- name: Enable full keyboard access for all controls
+  # (e.g. enable Tab in modal dialogs)
+  shell: defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+- name: Use scroll gesture with the Ctrl (^) modifier key to zoom
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
+    - defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+
+- name: Follow the keyboard focus while zoomed in
+  shell: defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+
+- name: Disable press-and-hold for keys in favor of key repeat
+  shell: defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+- name: Set a blazingly fast keyboard repeat rate
+  shell: "{{ item }}"
+  with_items:
+    - defaults write NSGlobalDomain KeyRepeat -int 0
+    - echo set fast
+
+- name: Set language and text formats
+  # Note: if you’re in the US, replace `EUR` with `USD`, `Centimeters` with
+  # `Inches`, `en_GB` with `en_US`, and `true` with `false`.
+  shell: "{{ item }}"
+  with_items:
+    - defaults write NSGlobalDomain AppleLanguages -array "en" "nl"
+    - defaults write NSGlobalDomain AppleMetricUnits -bool true
+
+- name: Disable auto-correct
+  shell: defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# - name: Stop iTunes from responding to the keyboard media keys
+#   shell: launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist 2> /dev/null
+
+###############################################################################
+# Screen                                                                      #
+###############################################################################
+
+- name: Save screenshots to the desktop
+  shell: defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+
+- name: Save screenshots in JPG format (BMP, GIF, JPG, PDF, TIFF)
+  shell: defaults write com.apple.screencapture type -string "jpg"
+
+- name: Disable shadow in screenshots
+  shell: defaults write com.apple.screencapture disable-shadow -bool true
+
+- name: Enable subpixel font rendering on non-Apple LCDs
+  shell: defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+- name: Enable HiDPI display modes (requires restart)
+  shell: defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
+  become: yes
+
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
+# - name: Finder - allow quitting via ⌘ + Q; doing so will also hide desktop icons
+#   shell: defaults write com.apple.finder QuitMenuItem -bool true
+
+# - name: Finder - disable window animations and Get Info animations
+#   shell: defaults write com.apple.finder DisableAllAnimations -bool true
+
+- name: Set Documents as the default location for new Finder windows
+  # For other paths, use `PfLo` and `file:///full/path/here/`
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.finder NewWindowTarget -string "PfDe"
+    - defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Documents/"
+
+- name: Show/hide icons for hard drives, servers, and removable media on the desktop
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+    - defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+    - defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+    - defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+# - name: Finder - show hidden files by default
+#   shell: defaults write com.apple.finder AppleShowAllFiles -bool true
+
+- name: Finder - show all filename extensions
+  shell: defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+- name: Finder - show status bar
+  shell: defaults write com.apple.finder ShowStatusBar -bool true
+
+- name: Finder - show path bar
+  shell: defaults write com.apple.finder ShowPathbar -bool true
+
+- name: Finder - allow text selection in Quick Look
+  shell: defaults write com.apple.finder QLEnableTextSelection -bool true
+
+- name: Display full POSIX path as Finder window title
+  shell: defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+- name: When performing a search, search the current folder by default
+  shell: defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+- name: Disable the warning when changing a file extension
+  shell: defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+- name: Enable spring loading for directories
+  shell: defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+
+- name: Remove the spring loading delay for directories
+  shell: defaults write NSGlobalDomain com.apple.springing.delay -float 0
+
+- name: Disable disk image verification
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.frameworks.diskimages skip-verify -bool true
+    - defaults write com.apple.frameworks.diskimages skip-verify-locked -bool true
+    - defaults write com.apple.frameworks.diskimages skip-verify-remote -bool true
+
+- name: Automatically open a new Finder window when a volume is mounted
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
+    - defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
+    - defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+
+- name: Show item info near icons on the desktop and in other icon views
+  shell: "{{ item }}"
+  with_items:
+    - /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+    - /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+    - /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
+
+# - name: Show item info to the right of the icons on the desktop
+#   shell: /usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" ~/Library/Preferences/com.apple.finder.plist
+
+- name: Enable snap-to-grid for icons on the desktop and in other icon views
+  shell: "{{ item }}"
+  with_items:
+    - /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+    - /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+    - /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+
+- name: Increase grid spacing for icons on the desktop and in other icon views
+  shell: "{{ item }}"
+  with_items:
+    - /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+    - /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+    - /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
+
+- name: Increase the size of icons on the desktop and in other icon views
+  shell: "{{ item }}"
+  with_items:
+    - /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+    - /usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+    - /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
+
+- name: Use column view in all Finder windows by default
+  # Four-letter codes for the other view modes (`icnv`, `clmv`, `Flwv`, `Nlsv`)
+  shell: defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+
+- name: Disable the warning before emptying the Trash
+  shell: defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+- name: Enable AirDrop over Ethernet and on unsupported Macs running Lion
+  shell: defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+
+- name: Show the ~/Library folder
+  shell: chflags nohidden ~/Library
+
+- name: Expand File Info panes
+  # “General”, “Open with”, and “Sharing & Permissions”
+  shell: defaults write com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true Privileges -bool true
+
+###############################################################################
+# Dock, Dashboard, and hot corners                                            #
+###############################################################################
+
+- name: Enable highlight hover effect for the grid view of a stack (Dock)
+  shell: defaults write com.apple.dock mouse-over-hilite-stack -bool true
+
+- name: Set the icon size of Dock items to 45 pixels
+  shell: defaults write com.apple.dock tilesize -int 45
+
+- name: Minimize windows into their application’s icon
+  shell: defaults write com.apple.dock minimize-to-application -bool true
+
+- name: Wipe all (default) app icons from the Dock
+  # This is only really useful when setting up a new Mac, or if you don’t use
+  # the Dock to launch apps.
+  shell: defaults write com.apple.dock persistent-apps -array ""
+
+# - name: Disable Dashboard
+#   shell: defaults write com.apple.dashboard enabled-state -bool false
+
+- name: Remove the auto-hiding Dock delay
+  shell: defaults write com.apple.dock autohide -bool true
+
+- name: Enable magnification
+  shell: defaults write com.apple.dock magnification -bool true
+
+- name: Magnification large size
+  shell: defaults write com.apple.dock largsesize -float 72.84491
+
+# - name: Add a spacer to the left side of the Dock (where the applications are)
+#   shell: defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
+# - name: Add a spacer to the right side of the Dock (where the Trash is)
+#   shell: defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-type="spacer-tile";}'
+
+ # Hot corners
+ # Possible values:
+ #  0: no-op
+ #  2: Mission Control
+ #  3: Show application windows
+ #  4: Desktop
+ #  5: Start screen saver
+ #  6: Disable screen saver
+ #  7: Dashboard
+ # 10: Put display to sleep
+ # 11: Launchpad
+ # 12: Notification Center
+- name: Set hot corners
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.dock wvous-tl-corner -int 5
+    - defaults write com.apple.dock wvous-tl-modifier -int 0
+    - defaults write com.apple.dock wvous-tr-corner -int 2
+    - defaults write com.apple.dock wvous-tr-modifier -int 0
+    #- defaults write com.apple.dock wvous-bl-corner -int 5
+    #- defaults write com.apple.dock wvous-bl-modifier -int 0
+
+###############################################################################
+# Time Machine, TextEdit and Disk Utility                                     #
+###############################################################################
+
+- name: Prevent Time Machine backup to new disks
+  shell: defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+- name: Use plain text mode for new TextEdit documents
+  shell: defaults write com.apple.TextEdit RichText -int 0
+
+- name: Open and save files as UTF-8 in TextEdit
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.TextEdit PlainTextEncoding -int 4
+    - defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+
+- name: Enable the debug menu in Disk Utility
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+    - defaults write com.apple.DiskUtility advanced-image-options -bool true
+
+###############################################################################
+# Mac App Store                                                               #
+###############################################################################
+
+- name: Enable the WebKit Developer Tools in the Mac App Store
+  shell: defaults write com.apple.appstore WebKitDeveloperExtras -bool true
+
+- name: Enable Debug Menu in the Mac App Store
+  shell: defaults write com.apple.appstore ShowDebugMenu -bool true
+
+###############################################################################
+# Messages                                                                    #
+###############################################################################
+
+- name: Disable automatic emoji substitution (i.e. use plain text smileys)
+  shell: defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
+
+- name: Disable smart quotes
+  shell: defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
+
+- name: Disable continuous spell checking
+  shell: defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
+
+###############################################################################
+# Security                                                                    #
+###############################################################################
+
+- name: Disable Automatically allow signed software to receive incoming connections
+  shell: defaults write /Library/Preferences/com.apple.alf allowsignedenabled -bool false
+  become: yes
+
+- name: Disable captive portal
+  shell: defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control Active -bool false
+  become: yes
+
+- name: Fix CVE-2016-0777 (SSH UseRoaming)
+  lineinfile: dest=/etc/ssh/ssh_config state=present regexp=^UseRoaming line="UseRoaming no"
+  become: yes
+
+- name: Avoid creating .DS_Store files on network volumes
+  shell: defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+- name: Disable the “Are you sure you want to open this application?” dialog
+  shell: defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+- name: Disable the crash reporter
+  shell: defaults write com.apple.CrashReporter DialogType -string "none"
+
+- name: Save to disk (not to iCloud) by default
+  shell: defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+- name: Require password immediately after sleep or screen saver begins
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.screensaver askForPassword -int 1
+    - defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+- name: Disable local Time Machine backups
+  shell: tmutil disablelocal
+  become: yes
+
+- name: Prevent Time Machine backup to new disks
+  shell: defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+- name: Disabling Services
+  shell: launchctl unload -w {{ item }}
+  with_items:
+    - /System/Library/LaunchAgents/com.apple.gamed.plist
+    - /System/Library/LaunchAgents/com.apple.icloud.findmydeviced.findmydevice-user-agent.plist
+    - /System/Library/LaunchAgents/com.apple.Maps.pushdaemon.plist
+    - /System/Library/LaunchDaemons/com.apple.apsd.plist
+    - /System/Library/LaunchDaemons/com.apple.findmymac.plist
+    - /System/Library/LaunchDaemons/com.apple.findmymacmessenger.plist
+    - /System/Library/LaunchAgents/com.apple.metadata.SpotlightNetHelper.plist
+
+- name: Disable Blueooth
+  shell: defaults write /Library/Preferences/com.apple.Bluetooth.plist ControllerPowerState -bool FALSE
+  become: yes
+
+- name: Force eviction of Filevault Keys from memory
+  shell: pmset -a destroyfvkeyonstandby 1 hibernatemode 25
+  become: yes
+
+- name: Disable Power Nap
+  shell: pmset -a darkwakes 0
+  become: yes
+
+- name: Disable Wake on Network
+  shell: pmset -a womp 0
+  become: yes
+
+- name: Display Sleep after 60 minutes
+  shell: pmset displaysleep 60
+  become: yes
+
+- name: Disable force click and haptic feedback
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.AppleMultitouchTrackpad ForceSuppressed -bool true
+    - defaults write com.apple.AppleMultitouchTrackpad ActuateDetents -bool false
+    - defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool false
+  ignore_errors: true
+
+###############################################################################
+# Firewall                                                                    #
+###############################################################################
+
+- name: Enable Application Layer Firewall
+  shell: defaults write /Library/Preferences/com.apple.alf globalstate -bool true
+  become: yes
+
+- name: Enable Firewall Stealth Mode
+  shell: defaults write /Library/Preferences/com.apple.alf stealthenabled -bool true
+  become: yes
+
+- name: Enable Firewall Logging
+  shell: defaults write /Library/Preferences/com.apple.alf loggingenabled -bool true
+  become: yes
+
