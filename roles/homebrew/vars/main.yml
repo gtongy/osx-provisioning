@@ -1,0 +1,5 @@
+homebrew_taps:
+  - caskroom/cask
+
+homebrew_packages:
+  - { name: elixir }

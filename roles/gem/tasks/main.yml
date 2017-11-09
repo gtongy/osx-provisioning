@@ -1,0 +1,6 @@
+- name: install gem packages
+  gem:
+    name={{ item.name }}
+    state={{ item.state | default('latest') }}
+  with_items:
+    - "{{ gem_packages }}"
