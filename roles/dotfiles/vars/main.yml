@@ -1,0 +1,11 @@
+dotfiles_repo: "git@gitlab.com:gokken/dotfiles.git"
+dotfiles_repo_accept_hostkey: no
+dotfiles_repo_local_destination: "~/Documents/dotfiles"
+
+dotfiles_home: "~"
+dotfiles_files:
+  - .gitconfig
+  - .gitignore
+  - .vimrc
+  - .zshrc
+  - .zshenv
