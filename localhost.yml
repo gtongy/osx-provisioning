@@ -4,3 +4,5 @@
   roles:
     - { role: homebrew, tags: [homebrew] }
     - { role: gem, tags: [gem] }
+    - { role: dotfiles, tags: [dotfiles] }
+    
