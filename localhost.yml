@@ -3,6 +3,6 @@
   gather_facts: no
   roles:
     - { role: homebrew, tags: [homebrew] }
+    - { role: anyenv, tags: [anyenv] }
     - { role: gem, tags: [gem] }
     - { role: dotfiles, tags: [dotfiles] }
-    
