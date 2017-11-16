@@ -10,8 +10,18 @@
    with_items:
       - "{{ anyenv_plugins }}"
 
+ - name: Create anyenv directory
+   file:
+     path: "{{ anyenv_installation_dir }}/envs/{{ item }}"
+     state: directory
+     mode: 0775
+   with_items:
+    - "{{ anyenv_envs }}"
+
  - name: Install envs
    shell:
-    /bin/bash -lc "anyenv install -s {{ item }}"
+     "anyenv install {{ item }}"
+   environment:
+     PATH: "{{ anyenv_installation_dir }}/bin:{{ lookup('env', 'PATH') }}"
    with_items:
      - "{{ anyenv_envs }}"
