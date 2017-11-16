@@ -1,4 +1,4 @@
-- name: install gem packages
+- name: Install gem packages
   gem:
     name={{ item.name }}
     state={{ item.state | default('latest') }}

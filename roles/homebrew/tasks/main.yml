@@ -1,12 +1,12 @@
-- name: add homebrew tap repository
+- name: Add homebrew tap repository
   homebrew_tap: tap={{ item }} state=present
   with_items:
     - "{{ homebrew_taps }}"
 
-- name: update homebrew
+- name: Update homebrew
   homebrew: update_homebrew=yes
 
-- name: install brew packages
+- name: Install brew packages
   homebrew: >
     name={{ item.name }}
     state={{ item.state | default('latest') }}
@@ -18,7 +18,7 @@
   with_items:
     "{{ homebrew_packages }}"
 
-- name: install cask packages
+- name: Install cask packages
   homebrew_cask: name={{ item.name }} state={{ item.state|default('installed') }}
   with_items:
     - "{{ homebrew_cask_packages }}"
