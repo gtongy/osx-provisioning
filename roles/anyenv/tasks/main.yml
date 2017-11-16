@@ -20,7 +20,7 @@
 
  - name: Install envs
    shell:
-     "anyenv install {{ item }}"
+      "anyenv install -s {{ item }}"
    environment:
      PATH: "{{ anyenv_installation_dir }}/bin:{{ lookup('env', 'PATH') }}"
    with_items:

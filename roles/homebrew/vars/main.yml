@@ -3,6 +3,7 @@ homebrew_taps:
 
 homebrew_packages:
   - { name: elixir }
+  - { name: rmtrash }
 
 homebrew_cask_packages:
   - name: docker
