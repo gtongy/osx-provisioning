@@ -1,0 +1,17 @@
+ - name: Install anyenv
+   git:
+     repo: "{{ anyenv_repository_url }}"
+     dest: "{{ anyenv_installation_dir }}"
+
+ - name: Install anyenv plugins
+   git:
+     repo: "{{ item.repository_url }}"
+     dest: "{{ anyenv_plugins_installation_dir }}/{{ item.name }}"
+   with_items:
+      - "{{ anyenv_plugins }}"
+
+ - name: Install envs
+   shell:
+    /bin/bash -lc "anyenv install -s {{ item }}"
+   with_items:
+     - "{{ anyenv_envs }}"
