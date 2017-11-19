@@ -1,0 +1,8 @@
+ - name: Install go to use goenv
+   shell: goenv install -s {{ go_version }}
+
+ - name: Write the version to use goenv
+   shell: goenv global {{ go_version }}
+
+ - name: Install dep
+   shell: go get -u github.com/golang/dep/cmd/dep
