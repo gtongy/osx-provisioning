@@ -6,3 +6,4 @@
     - { role: anyenv, tags: [anyenv] }
     - { role: gem, tags: [gem] }
     - { role: dotfiles, tags: [dotfiles] }
+    - { role: go, tags: [go] }
