@@ -1,0 +1,8 @@
+linked_packages:
+  - { name: openssl }
+  - { name: libxml2 }
+  - { name: mcrypt }
+  - { name: autoconf }
+  - { name: automake }
+  - { name: bison }
+php_version: 7.0.2

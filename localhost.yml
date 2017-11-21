@@ -7,3 +7,4 @@
     - { role: gem, tags: [gem] }
     - { role: dotfiles, tags: [dotfiles] }
     - { role: go, tags: [go] }
+    - { role: php, tags: [php] }

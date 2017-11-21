@@ -1,0 +1,17 @@
+ - name: Linked homebrew packages to use phpenv
+   homebrew: >
+    name={{ item.name }}
+    state=linked
+   with_items:
+    - "{{ linked_packages }}"
+
+ - name: Install php to use phpenv
+   shell: phpenv install {{ php_version }}
+
+ - name: Write the version to use phpenv
+   shell: phpenv global {{ php_version }}
+
+ - name: install composer
+   become: true
+   shell: curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin && mv /usr/bin/composer.phar /usr/bin/composer
+         creates=/usr/bin/composer

@@ -4,6 +4,12 @@ homebrew_taps:
 homebrew_packages:
   - { name: elixir }
   - { name: rmtrash }
+  - { name: openssl }
+  - { name: libxml2 }
+  - { name: mcrypt }
+  - { name: autoconf }
+  - { name: automake }
+  - { name: bison }
 
 homebrew_cask_packages:
-  - name: docker
+  - { name: docker }
