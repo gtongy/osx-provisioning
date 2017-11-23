@@ -19,7 +19,8 @@
     "{{ homebrew_packages }}"
 
 - name: Install cask packages
-  homebrew_cask: name={{ item.name }} state={{ item.state|default('installed') }}
+  homebrew_cask: >
+    name={{ item.name }}
+    state={{ item.state|default('installed') }}
   with_items:
     - "{{ homebrew_cask_packages }}"
-  register: cask_result
