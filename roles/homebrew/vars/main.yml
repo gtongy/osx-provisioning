@@ -2,7 +2,6 @@ homebrew_taps:
   - caskroom/cask
 
 homebrew_packages:
-  - { name: elixir }
   - { name: rmtrash }
   - { name: openssl }
   - { name: libxml2 }
@@ -10,6 +9,26 @@ homebrew_packages:
   - { name: autoconf }
   - { name: automake }
   - { name: bison }
+  - { name: chromedriver }
+  - { name: docker-machine }
+  - { name: jq }
+  - { name: tree }
+  - { name: curl }
+  - { name: nkf }
+  - { name: peco }
+  - { name: zplug }
+  - { name: parallel }
+  - { name: wget }
+  - { name: awscli }
 
 homebrew_cask_packages:
   - { name: docker }
+  - { name: visual-studio-code }
+  - { name: phpstorm }
+  - { name: atom }
+  - { name: virtualbox }
+  - { name: spectacle }
+  - { name: alfred }
+  - { name: iterm2 }
+  - { name: kobito }
+  - { name: slack }
