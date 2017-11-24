@@ -32,3 +32,4 @@ homebrew_cask_packages:
   - { name: iterm2 }
   - { name: kobito }
   - { name: slack }
+  - { name: table-tool }
