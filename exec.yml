@@ -1,6 +1,5 @@
 - hosts: localhost
   connection: local
-  gather_facts: no
   roles:
     - { role: homebrew, tags: [homebrew] }
     - { role: anyenv, tags: [anyenv] }
