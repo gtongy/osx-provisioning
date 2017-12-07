@@ -11,4 +11,4 @@ clone:
 	@git clone https://github.com/gtongy/osx-setup.git && \
 	@cd osx-setup
 playbook:
-	HOMEBREW_CASK_OPTS="--appdir=~/Applications" ansible-playbook -i hosts -K localhost.yml
+	HOMEBREW_CASK_OPTS="--appdir=~/Applications" ansible-playbook -i hosts -K exec.yml	
