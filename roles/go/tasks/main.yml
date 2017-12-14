@@ -1,8 +1,14 @@
  - name: Install go to use goenv
    shell: goenv install -s {{ go_version }}
+   register: install_goenv
+   changed_when: install_goenv.rc != 0
 
  - name: Write the version to use goenv
    shell: goenv global {{ go_version }}
+   register: global_goenv
+   changed_when: global_env.rc != 0
 
  - name: Install dep
    shell: go get -u github.com/golang/dep/cmd/dep
+   register: install_dep
+   changed_when: install_dep.rc != 0

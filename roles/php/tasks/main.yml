@@ -1,5 +1,5 @@
  - name: Linked homebrew packages to use phpenv
-   homebrew: >
+   homebrew:
     name={{ item.name }}
     state=linked
    with_items:
@@ -7,9 +7,13 @@
 
  - name: Install php to use phpenv
    shell: phpenv install {{ php_version }}
+   register: install_phpenv
+   changed_when: install_phpenv.rc != 0
 
  - name: Write the version to use phpenv
    shell: phpenv global {{ php_version }}
+   register: global_phpenv
+   changed_when: global_phpenv.rc != 0
 
  - name: Check composer
    stat: path=/usr/local/bin/composer
