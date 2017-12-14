@@ -7,7 +7,7 @@
   homebrew: update_homebrew=yes
 
 - name: Install brew packages
-  homebrew: >
+  homebrew:
     name={{ item.name }}
     state={{ item.state | default('latest') }}
     install_options={{
@@ -19,7 +19,7 @@
     "{{ homebrew_packages }}"
 
 - name: Install cask packages
-  homebrew_cask: >
+  homebrew_cask:
     name={{ item.name }}
     state={{ item.state|default('installed') }}
   with_items:
