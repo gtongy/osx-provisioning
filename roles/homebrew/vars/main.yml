@@ -31,3 +31,4 @@ homebrew_cask_packages:
   - { name: alfred }
   - { name: iterm2 }
   - { name: slack }
+  - { name: table-tool }
