@@ -30,5 +30,5 @@ homebrew_cask_packages:
   - { name: spectacle }
   - { name: alfred }
   - { name: iterm2 }
-  - { name: kobito }
   - { name: slack }
+  - { name: table-tool }
