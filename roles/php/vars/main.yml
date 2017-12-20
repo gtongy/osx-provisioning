@@ -5,4 +5,6 @@ linked_packages:
   - { name: autoconf }
   - { name: automake }
   - { name: bison }
+  - { name: libjpeg }
+  - { name: libpng }
 php_version: 7.0.2

@@ -21,10 +21,8 @@
  - name: Install envs
    shell:
       "anyenv install -s {{ item }}"
-   register: install_envs
    environment:
      PATH: "{{ anyenv_installation_dir }}/bin:{{ lookup('env', 'PATH') }}"
    with_items:
      - "{{ anyenv_envs }}"
-   changed_when: install_envs.rc != 0
    
