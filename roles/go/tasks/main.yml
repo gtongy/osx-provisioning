@@ -6,7 +6,7 @@
  - name: Write the version to use goenv
    shell: goenv global {{ go_version }}
    register: global_goenv
-   changed_when: global_env.rc != 0
+   changed_when: global_goenv.rc != 0
 
  - name: Install dep
    shell: go get -u github.com/golang/dep/cmd/dep
