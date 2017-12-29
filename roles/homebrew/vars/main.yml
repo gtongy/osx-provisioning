@@ -23,6 +23,7 @@ homebrew_packages:
   - { name: node }
   - { name: libjpeg }
   - { name: libpng }
+  - { name: zsh }
 
 homebrew_cask_packages:
   - { name: docker }
