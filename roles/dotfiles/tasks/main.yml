@@ -12,3 +12,12 @@
      state: link
    become: no
    with_items: "{{ dotfiles_files }}"
+
+ - name: Make directory vim-neobundle
+   file: path="{{ dotfiles_repo_local_destination }}/.vim/bundle" state=directory
+
+ - name: Install neobundle
+   git:
+     repo: "{{ neobundle_repo }}"
+     dest: "{{ neobundle_repo_local_destination }}"
+     accept_hostkey: "{{ neobundle_repo_accept_hostkey }}"
