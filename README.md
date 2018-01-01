@@ -15,7 +15,7 @@ provisioning tool is
 
 ## Usage
 
-After clone this repogitory, the following command will be executed.
+After clone this repository, the following command will be executed.
 
 ```
 $ cd /path/to/work/osx-provisioning
