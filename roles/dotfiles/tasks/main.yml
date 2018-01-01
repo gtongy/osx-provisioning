@@ -12,3 +12,29 @@
      state: link
    become: no
    with_items: "{{ dotfiles_files }}"
+
+ - name: Make directory vim-neobundle
+   file: path="{{ dotfiles_repo_local_destination }}/.vim/bundle" state=directory
+
+ - name: Install neobundle
+   git:
+     repo: "{{ neobundle_repo }}"
+     dest: "{{ neobundle_repo_local_destination }}"
+     accept_hostkey: "{{ neobundle_repo_accept_hostkey }}"
+
+ - name: Make directory vim-color-molokai
+   file: path="{{ dotfiles_repo_local_destination }}/.vim/colors" state=directory
+
+ - name: Install vim-color-molokai
+   git:
+     repo: "{{ vim_color_molokai_repo }}"
+     dest: "{{ dotfiles_home }}/molokai"
+     accept_hostkey: "{{ vim_color_molokai_repo_accept_hostkey }}"
+
+ - name: Stat vim-colors-directory
+   stat: path="{{ vim_color_molokai_repo_local_destination }}"
+   register: molokai_stat
+
+ - name: Move vim-color-molokai to vim-colors-directory
+   command: mv "{{ dotfiles_home }}/molokai/colors/molokai.vim" "{{ vim_color_molokai_repo_local_destination }}"
+   when: molokai_stat.stat.exists
