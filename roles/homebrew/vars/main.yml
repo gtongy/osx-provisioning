@@ -1,5 +1,6 @@
 homebrew_taps:
   - caskroom/cask
+  - spotify/public
 
 homebrew_packages:
   - { name: rmtrash }
@@ -37,3 +38,4 @@ homebrew_cask_packages:
   - { name: table-tool }
   - { name: google-chrome }
   - { name: macdown }
+  - { name: spotify }
