@@ -12,3 +12,10 @@
    shell: go get -u github.com/golang/dep/cmd/dep
    register: install_dep
    changed_when: install_dep.rc != 0
+
+ - name: Install packeages for visual studio code extension
+   shell: go get -u -v {{ item.name }}
+   with_items:
+    - "{{ vscode_packages }}"
+   register: install_vscode_packages
+   changed_when: install_vscode_packages.rc != 0
