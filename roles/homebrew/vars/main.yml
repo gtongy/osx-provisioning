@@ -39,4 +39,4 @@ homebrew_cask_packages:
   - { name: table-tool }
   - { name: google-chrome }
   - { name: macdown }
-  - { name: spotify }
+  - { name: sequel-pro }
