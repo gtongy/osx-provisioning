@@ -7,3 +7,4 @@
     - { role: dotfiles, tags: [dotfiles] }
     - { role: go, tags: [go] }
     - { role: php, tags: [php] }
+    - { role: node, tags: [node] }

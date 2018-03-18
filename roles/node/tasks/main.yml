@@ -1,0 +1,17 @@
+ - name: Install node to use nodenv
+   shell: nodenv install -s {{ node_version }}
+   register: install_nodenv
+   changed_when: install_nodenv.rc != 0
+
+ - name: Write the version to use nodenv
+   shell: nodenv global {{ node_version }}
+   register: global_nodenv
+   changed_when: global_nodenv.rc != 0
+
+ - name: Install npm packeages
+   npm:
+     name: "{{ item.name }}"
+     state: latest
+     global: yes
+   with_items:
+    - "{{ npm_packages }}"
