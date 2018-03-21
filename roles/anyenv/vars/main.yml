@@ -10,3 +10,4 @@ anyenv_envs:
    - goenv
    - phpenv
    - pyenv
+   - nodenv
