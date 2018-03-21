@@ -1,7 +1,6 @@
-dotfiles_repo: "git@gitlab.com:gokken/dotfiles.git"
+dotfiles_repo: "git@github.com:gtongy/dotfiles.git"
 dotfiles_repo_accept_hostkey: no
-dotfiles_repo_local_destination: "~/Documents/dotfiles"
-
+dotfiles_repo_local_destination: "~/workspace/dotfiles"
 dotfiles_home: "~"
 dotfiles_files:
   - .gitconfig
@@ -9,3 +8,11 @@ dotfiles_files:
   - .vimrc
   - .zshrc
   - .zshenv
+
+neobundle_repo: "git://github.com/Shougo/neobundle.vim"
+neobundle_repo_local_destination: "~/.vim/bundle/neobundle.vim"
+neobundle_repo_accept_hostkey: no
+
+vim_color_molokai_repo: "https://github.com/tomasr/molokai"
+vim_color_molokai_repo_local_destination: "~/.vim/colors/"
+vim_color_molokai_repo_accept_hostkey: no

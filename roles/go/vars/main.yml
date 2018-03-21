@@ -1,1 +1,14 @@
 go_version: 1.9.2
+vscode_packages:
+  - { name: github.com/nsf/gocode }
+  - { name: github.com/rogpeppe/godef }
+  - { name: github.com/zmb3/gogetdoc }
+  - { name: github.com/golang/lint/golint }
+  - { name: github.com/lukehoban/go-outline }
+  - { name: sourcegraph.com/sqs/goreturns }
+  - { name: golang.org/x/tools/cmd/gorename }
+  - { name: github.com/tpng/gopkgs }
+  - { name: github.com/newhook/go-symbols }
+  - { name: github.com/cweill/gotests/... }
+  - { name: github.com/derekparker/delve/cmd/dlv }
+  - { name: github.com/mattn/todo }
