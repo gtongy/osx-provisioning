@@ -1,7 +1,9 @@
 install:
 	@make ansible
-	@make playbook
+	@make exec
 ansible:
 	@brew install ansible
-playbook:
-	HOMEBREW_CASK_OPTS="--appdir=~/Applications" ansible-playbook -i hosts -K exec.yml	
+exec:
+	HOMEBREW_CASK_OPTS="--appdir=~/Applications" ansible-playbook -i hosts -K exec.yml
+tag:
+	HOMEBREW_CASK_OPTS="--appdir=~/Applications" ansible-playbook -i hosts -K exec.yml --tags="$(TAG)"
