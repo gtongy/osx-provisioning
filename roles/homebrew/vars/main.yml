@@ -1,6 +1,5 @@
 homebrew_taps:
   - caskroom/cask
-  - spotify/public
 
 homebrew_packages:
   - { name: rmtrash }
@@ -28,17 +27,18 @@ homebrew_packages:
   - { name: pcre }
   - { name: ansible }
   - { name: tig }
+  - { name: redis }
+  - { name: graphviz }
 
 homebrew_cask_packages:
   - { name: docker }
   - { name: visual-studio-code }
   - { name: phpstorm }
-  - { name: atom }
   - { name: spectacle }
   - { name: alfred }
   - { name: iterm2 }
   - { name: slack }
-  - { name: table-tool }
   - { name: google-chrome }
   - { name: macdown }
   - { name: sequel-pro }
+  - { name: vivaldi }
