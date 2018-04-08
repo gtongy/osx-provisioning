@@ -1,0 +1,12 @@
+- name: Install Visual Studio Code App
+  homebrew_cask: name=visual-studio-code state=latest
+  notify:
+    - brew cask doctor
+
+- name: install extensions
+  command: "code --install-extension '{{ item.name }}'"
+  with_items:
+    - "{{ extensions }}"
+  register: vscode_result
+  changed_when: "'already installed' not in vscode_result.stdout"
+  

@@ -5,6 +5,7 @@
     - { role: anyenv, tags: [anyenv] }
     - { role: gem, tags: [gem] }
     - { role: dotfiles, tags: [dotfiles] }
+    - { role: vscode, tags: [vscode] }
     - { role: go, tags: [go] }
     - { role: php, tags: [php] }
     - { role: node, tags: [node] }

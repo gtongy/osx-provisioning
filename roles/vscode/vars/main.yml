@@ -1,0 +1,10 @@
+extensions:
+ - { name: DavidAnson.vscode-markdownlint }
+ - { name: PeterJausovec.vscode-docker }
+ - { name: bungcip.better-toml }
+ - { name: dbaeumer.vscode-eslint }
+ - { name: jakethashi.vscode-angular2-emmet }
+ - { name: jebbs.plantuml }
+ - { name: lukehoban.Go }
+ - { name: sleutho.templex }
+ - { name: felixfbecker.php-intellisense }
