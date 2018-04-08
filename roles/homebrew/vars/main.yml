@@ -31,6 +31,8 @@ homebrew_packages:
   - { name: graphviz }
 
 homebrew_cask_packages:
+  - { name: thyme }
+  - { name: skype }
   - { name: docker }
   - { name: visual-studio-code }
   - { name: phpstorm }
