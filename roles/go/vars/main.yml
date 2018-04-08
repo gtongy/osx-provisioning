@@ -7,6 +7,7 @@ vscode_packages:
   - { name: github.com/lukehoban/go-outline }
   - { name: sourcegraph.com/sqs/goreturns }
   - { name: golang.org/x/tools/cmd/gorename }
+  - { name: golang.org/x/tools/cmd/guru }
   - { name: github.com/tpng/gopkgs }
   - { name: github.com/newhook/go-symbols }
   - { name: github.com/cweill/gotests/... }
