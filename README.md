@@ -13,6 +13,7 @@ provisioning roles are
  - homebrew
  - node
  - php
+ - vscode
 
 ## Usage
 
