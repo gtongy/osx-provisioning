@@ -2,6 +2,9 @@ homebrew_taps:
   - caskroom/cask
 
 homebrew_packages:
+  - { name: fzf }
+  - { name: emojify }
+  - { name: heroku-toolbelt }
   - { name: rmtrash }
   - { name: openssl }
   - { name: libxml2 }
