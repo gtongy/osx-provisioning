@@ -34,6 +34,7 @@ homebrew_packages:
   - { name: graphviz }
 
 homebrew_cask_packages:
+  - { name: dash }
   - { name: thyme }
   - { name: skype }
   - { name: docker }
