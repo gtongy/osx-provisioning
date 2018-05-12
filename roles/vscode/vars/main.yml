@@ -5,6 +5,7 @@ extensions:
  - { name: dbaeumer.vscode-eslint }
  - { name: jakethashi.vscode-angular2-emmet }
  - { name: jebbs.plantuml }
- - { name: lukehoban.Go }
+ - { name: ms-vscode.go }
  - { name: sleutho.templex }
  - { name: felixfbecker.php-intellisense }
+ - { name: vittorioromeo.expand-selection-to-scope }
