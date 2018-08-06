@@ -1,5 +1,5 @@
 - name: Add homebrew tap repository
-  homebrew_tap: tap={{ item }} state=present
+  homebrew_tap: name={{ item.name }} state=present
   with_items:
     - "{{ homebrew_taps }}"
 

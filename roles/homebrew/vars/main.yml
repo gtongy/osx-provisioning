@@ -1,7 +1,8 @@
 homebrew_taps:
-  - caskroom/cask
+  - { name: homebrew/cask }
 
 homebrew_packages:
+  - { name: mysql }
   - { name: fzf }
   - { name: emojify }
   - { name: heroku-toolbelt }
@@ -32,8 +33,10 @@ homebrew_packages:
   - { name: tig }
   - { name: redis }
   - { name: graphviz }
+  - { name: textql }
 
 homebrew_cask_packages:
+  - { name: dash }
   - { name: thyme }
   - { name: skype }
   - { name: docker }
