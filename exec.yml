@@ -1,6 +1,7 @@
 - hosts: localhost
   connection: local
   roles:
+    - { role: system, tags: [system] }
     - { role: homebrew, tags: [homebrew] }
     - { role: anyenv, tags: [anyenv] }
     - { role: gem, tags: [gem] }
