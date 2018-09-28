@@ -1,0 +1,57 @@
+osx_defaults:
+  # フルキーボードアクセスを有効
+  - { domain: NSGlobaldomain, key: AppleKeyboardUIMode, type: bool, value: false, state: present }
+  # 拡張子を常に表示
+  - { domain: NSGlobaldomain, key: AppleShowAllExtensions, type: bool, value: true, state: present }
+  # 保存ダイアログを詳細設定で表示
+  - { domain: NSGlobaldomain, key: NSNavPanelExpandedStateForSaveMode, type: bool, value: true, state: present }
+  # バッテリー残量を％表記に
+  - { domain: com.apple.menuextra.battery, key: ShowPercent, type: string, value: "YES", state: present }
+  # 日付と時刻のフォーマット（24時間表示、秒表示あり、日付・曜日を表示）
+  - { domain: com.apple.menuextra.clock, key: DateFormat, type: string, value: "M\u6708d\u65e5(EEE)  H:mm:ss", state: present }
+  # Dock 通常サイズ
+  - { domain: com.apple.dock, key: tilesize, type: int, value: 32, state: present }
+  # Dock 拡大を有効
+  - { domain: com.apple.dock, key: magnification, type: bool, value: yes, state: present }
+  # 拡大時のサイズ (一般的な最大: 128)
+  - { domain: com.apple.dock, key: largesize, type: int, value: 64, state: present }
+  # Dockを自動的に隠す
+  - { domain: com.apple.dock, key: autohide, type: bool, value: true, state: present }
+  # Dockをすぐに表示する
+  - { domain: com.apple.dock, key: autohide-delay, type: float, value: 0, state: present }
+  # Dockの位置を右端、または下端によせる
+  - { domain: com.apple.dock, key: pinning, type: string, value: "end", state: present }
+  # デフォルトはカラムビュー表示
+  - { domain: com.apple.finder, key: FXPreferredViewStyle, type: string, value: "clmv", state: present }
+  # タイトルバーにフルパスを表示
+  - { domain: com.apple.finder, key: _FXShowPosixPathInTitle, type: bool, value: true, state: present }
+  # ステータスバーを表示
+  - { domain: com.apple.finder, key: ShowStatusBar, type: bool, value: true, state: present }
+  # パスバーを表示
+  - { domain: com.apple.finder, key: ShowPathbar, type: bool, value: true, state: present }
+  # フォルダを開くときのアニメーションを無効
+  - { domain: com.apple.finder, key: AnimateWindowZoom, type: bool, value: false, state: present }
+  # ファイルを開くときのアニメーションを無効
+  - { domain: com.apple.finder, key: NSAutomaticWindowAnimationsEnabled, type: bool, value: false, state: present }
+  # Finderのアニメーション効果を全て無効にする
+  - { domain: com.apple.finder, key: DisableAllAnimations, type: bool, value: false, state: present }
+  # スクロールバーの弾むアニメーションを無効にする
+  - { domain: com.apple.finder, key: DisableAllAnimations, type: bool, value: false, state: present }
+  # ダイアログ表示やウィンドウリサイズ速度を高速化
+  - { domain: com.apple.finder, key: NSWindowResizeTime, type: float, value: 0.1, state: present }
+  # Finderの効果音を無効にする
+  - { domain: com.apple.finder, key: FinderSounds, type: bool, value: no, state: present }
+  # ネットワークフォルダに.DS_Storeを作らない
+  - { domain: com.apple.desktopservices, key: DSDontWriteNetworkStores, type: bool, value: true, state: present }
+  # Trackpad タップでクリック
+  - { domain: com.apple.driver.AppleBluetoothMultitouch.trackpad, key: Clicking, type: int, value: 0, state: present }
+  # Screen Capture 保存場所の変更
+  - { domain: com.apple.screencapture, key: location, type: string, value: "~/Downloads", state: present }
+  # キャプチャのプレフィックスを変更
+  - { domain: com.apple.screencapture, key: name, type: string, value: "SS_", state: present }
+  # キャプチャに影を付けない
+  - { domain: com.apple.screencapture, key: disable-shadow, type: bool, value: true, state: present }
+killall:
+  - { name: Dock }
+  - { name: Finder }
+  - { name: SystemUIServer }
