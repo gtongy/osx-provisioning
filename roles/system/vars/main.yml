@@ -10,15 +10,15 @@ osx_defaults:
   # 日付と時刻のフォーマット（24時間表示、秒表示あり、日付・曜日を表示）
   - { domain: com.apple.menuextra.clock, key: DateFormat, type: string, value: "M\u6708d\u65e5(EEE)  H:mm:ss", state: present }
   # Dock 通常サイズ
-  - { domain: com.apple.dock, key: tilesize, type: int, value: 32, state: present }
+  - { domain: com.apple.dock, key: tilesize, type: float, value: 32, state: present }
   # Dock 拡大を有効
   - { domain: com.apple.dock, key: magnification, type: bool, value: yes, state: present }
   # 拡大時のサイズ (一般的な最大: 128)
   - { domain: com.apple.dock, key: largesize, type: int, value: 64, state: present }
   # Dockを自動的に隠す
   - { domain: com.apple.dock, key: autohide, type: bool, value: true, state: present }
-  # Dockをすぐに表示する
-  - { domain: com.apple.dock, key: autohide-delay, type: float, value: 0, state: present }
+  # Dockを擬似的に非表示(120秒のdelayを追加)
+  - { domain: com.apple.dock, key: autohide-delay, type: float, value: 120, state: present }
   # Dockの位置を右端、または下端によせる
   - { domain: com.apple.dock, key: pinning, type: string, value: "end", state: present }
   # デフォルトはカラムビュー表示
